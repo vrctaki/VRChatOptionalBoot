@@ -43,7 +43,7 @@ if ($CreateShortcut) {
     }
 
     $wsh = New-Object -ComObject Wscript.Shell
-    $sc = $wsh.CreateShortCut('vrc_optional_boot.ps1.lnk')
+    $sc = $wsh.CreateShortCut((Get-Item $PSCommandPath).Basename + '.ps1.lnk')
     $sc.TargetPath   = 'powershell.exe'
     $sc.Arguments    = '-ExecutionPolicy RemoteSigned  -WindowStyle Hidden .\vrc_optional_boot.ps1'
     $sc.IconLocation = $favicon_path
