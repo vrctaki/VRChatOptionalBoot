@@ -43,9 +43,9 @@ if ($CreateShortcut) {
     }
 
     $wsh = New-Object -ComObject Wscript.Shell
-    $sc = $wsh.CreateShortCut((Get-Item $PSCommandPath).Basename + '.ps1.lnk')
+    $sc = $wsh.CreateShortCut((Get-Item $PSCommandPath).Name + '.lnk')
     $sc.TargetPath   = 'powershell.exe'
-    $sc.Arguments    = '-ExecutionPolicy RemoteSigned  -WindowStyle Hidden .\vrc_optional_boot.ps1'
+    $sc.Arguments    = '-ExecutionPolicy RemoteSigned  -WindowStyle Hidden .\' + (Get-Item $PSCommandPath).Name
     $sc.IconLocation = $favicon_path
     $sc.WorkingDirectory  = $PSScriptRoot
     $sc.HotKey = "CTRL+SHIFT+Return"
