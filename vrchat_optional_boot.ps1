@@ -3,16 +3,7 @@
 #   - Version: 0.0.7
 #   - Licence: MIT
 #   - Author: vrctaki
-# * Reference:
-#   - XAML: https://qiita.com/Kosen-amai/items/27647f0a1ea5b41a9f5c
-#   - VRChat Boot Path: https://kamishirolab.booth.pm/items/1954145
-#   - Shortcut: https://teratail.com/questions/57372
-#   - Shortcut Icon: http://marazul2015.blog.fc2.com/blog-entry-39.html
-#   - Original Icon: https://twitter.com/naqtn/status/1257659359573635075
-#   - WaterMark: https://github.com/kunaludapi/Powercli/tree/master/Powershell%20GUI%20Placeholder%20textbox%20example
-# * Relation Tweet And Thread:
-#   - https://twitter.com/vrctaki/status/1257567286698766336
-#  
+
 Param(
     [switch]$CreateShortcut
 )
