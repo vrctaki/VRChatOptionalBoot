@@ -1,6 +1,6 @@
 # * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.6
+#   - Version: 0.0.7
 #   - Licence: MIT
 #   - Author: vrctaki
 # * Reference:
@@ -32,7 +32,8 @@ $regex_worldID = "^wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]
 $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
-$script_version = "0.0.6"
+$shortcut_basename = "VRChat optional boot"
+$script_version = "0.0.7"
 
 
 # Initializing Environment
@@ -42,14 +43,26 @@ if ($CreateShortcut) {
       $favicon_path = $vrc_path + ',0';
     }
 
+    $shortcut_folder = [environment]::getfolderpath("Programs")
+    $shortcut_fname = $shortcut_basename + ".lnk"
+    $shortcut_path = Join-Path -Path $shortcut_folder -ChildPath $shortcut_fname
+
     $wsh = New-Object -ComObject Wscript.Shell
-    $sc = $wsh.CreateShortCut((Get-Item $PSCommandPath).Name + '.lnk')
+    $sc = $wsh.CreateShortCut($shortcut_fname)
     $sc.TargetPath   = 'powershell.exe'
-    $sc.Arguments    = '-ExecutionPolicy RemoteSigned  -WindowStyle Hidden .\' + (Get-Item $PSCommandPath).Name
+    $sc.Arguments    = '-ExecutionPolicy RemoteSigned  -WindowStyle Hidden .\' + (Split-Path -Leaf $PSCommandPath)
     $sc.IconLocation = $favicon_path
     $sc.WorkingDirectory  = $PSScriptRoot
-    $sc.HotKey = "CTRL+SHIFT+Return"
+    # $sc.HotKey = "CTRL+SHIFT+Return"  # if you need hotkey, strip comment symbol.
+    $sc.Description = "Boot VRChat with optional arguments"
     $sc.save()
+
+    $doseCopyToStartMenu = Read-Host "Copy shortcut to Startmenu?[Y/N](Default[Y])"
+    if ($doseCopyToStartMenu -ne "N") {
+        Write-Host ("Create shortcut file '{0}'" -f $shortcut_path)
+        Copy-Item -Path $shortcut_fname -Destination $shortcut_folder
+        Start-Process -FilePath "Explorer.exe" -ArgumentList ("/select,`"{0}`"" -f $shortcut_path)
+    }
     return
 }
 
@@ -66,7 +79,7 @@ Add-Type -AssemblyName PresentationFramework
 $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 $window = [Windows.Markup.XamlReader]::Load($reader)
 
-$window.Title = ("VRChat Optional Boot(v{0})" -f ($script_version))
+$window.Title = ("VRC Optional Boot(v{0})" -f ($script_version))
 
 
 # Get Controls
