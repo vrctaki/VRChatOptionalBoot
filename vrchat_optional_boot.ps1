@@ -1,6 +1,6 @@
 # * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.7
+#   - Version: 0.0.8
 #   - Licence: MIT
 #   - Author: vrctaki
 
@@ -24,7 +24,7 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.7"
+$script_version = "0.0.8"
 
 
 # Initializing Environment
@@ -74,7 +74,6 @@ $window.Title = ("VRC Optional Boot(v{0})" -f ($script_version))
 
 
 # Get Controls
-$chk_desktopMode = $window.FindName("DesktopMode")
 $chk_oculusRift  = $window.FindName("OnOculusRift")
 
 $chk_guiDebug    = $window.FindName("GUIDebug")
@@ -96,13 +95,11 @@ $chk_profile1    = $window.FindName("UserProfile1")
 $chk_profile2    = $window.FindName("UserProfile2")
 $chk_profile3    = $window.FindName("UserProfile3")
 
-$btm_boot        = $window.FindName("Boot")
+# $btn_boot        = $window.FindName("Boot")
+$btn_bootVR      = $window.FindName("BootVR")
+$btn_bootDesktop = $window.FindName("BootDesktop")
 
 # Set Events
-$sb_toggleDesktopMode = {$chk_oculusRift.IsEnabled = -not ($chk_desktopMode.IsChecked)}
-$chk_desktopMode.Add_Checked($sb_toggleDesktopMode)
-$chk_desktopMode.Add_UnChecked($sb_toggleDesktopMode)
-
 $sb_toggleGUIDebug = {$chk_sdk2debug.IsEnabled = $chk_udonDebug.IsEnabled = ($chk_guiDebug.IsChecked)}
 $chk_guiDebug.Add_Checked($sb_toggleGUIDebug)
 $chk_guiDebug.Add_UnChecked($sb_toggleGUIDebug)
@@ -130,10 +127,27 @@ $txt_worldID.Add_LostFocus({
     }
 })
 
-$btm_boot.Add_Click({
+$btn_bootVR.Add_Click({
+    Boot-VRChat -isDesktopMode $false
+})
+
+$btn_bootDesktop.Add_Click({
+    Boot-VRChat -isDesktopMode $true
+})
+
+function Boot-VRChat{
+    param(
+        $isDesktopMode=$true
+    )
+
+    $sb_launch = {
+        param([string]$parameters)
+        Start-Process -FilePath $vrc_path -NoNewWindow -ArgumentList $parameters
+    }
+
     $boot_properties = @()
 
-    if ($chk_desktopMode.IsChecked) {
+    if ($isDesktopMode) {
         $boot_properties += "--no-vr"
     }
     else {
@@ -178,29 +192,32 @@ $btm_boot.Add_Click({
         $boot_properties += $room_url
     }
 
+    # 
     if ($chk_profile0.IsChecked) {
-        Boot-VRChat (($boot_properties + "--profile=0") -join " ")
+        &$sb_launch (($boot_properties + "--profile=0") -join " ")
     }
     if ($chk_profile1.IsChecked) {
-        Boot-VRChat (($boot_properties + "--profile=1") -join " ")
+        &$sb_launch (($boot_properties + "--profile=1") -join " ")
     }
     if ($chk_profile2.IsChecked) {
-        Boot-VRChat (($boot_properties + "--profile=2") -join " ")
+        &$sb_launch (($boot_properties + "--profile=2") -join " ")
     }
     if ($chk_profile3.IsChecked) {
-        Boot-VRChat (($boot_properties + "--profile=3") -join " ")
+        &$sb_launch (($boot_properties + "--profile=3") -join " ")
     }
 
     $window.close()
-})
+}
+
 
 
 # shoft hand
 $window.Add_KeyDown({
-    $press_key = $_.Key
+    $press_key = $_.Key.toString()
 
     $short_hands = @{
-        'Return'=$btm_boot.Click
+        # 'Return'=$btn_boot.Click  # not to use
+        'Escape'={ $window.close() }
     }
 
     if ($short_hands.ContainsKey($press_key)) {
@@ -209,10 +226,6 @@ $window.Add_KeyDown({
 })
 
 
-# functions
-function Boot-VRChat ([string]$parameters){
-    Start-Process -FilePath $vrc_path -NoNewWindow -ArgumentList $parameters
-}
 
 
 # Show Window

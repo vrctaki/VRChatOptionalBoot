@@ -2,40 +2,85 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title=""
-  Width="430"
-  Height="320"
+  Width="480"
+  Height="360"
   >
   <StackPanel>
-    <CheckBox Name="DesktopMode" Content="Desktop Mode(--no-vr) (_d)" IsChecked="True" />
-    <CheckBox Name="OnOculusRift" Content="Oculus Rift" IsEnabled="False" IsChecked="True" />
-    <Border Height="1" Background="gray" Margin="3" />
 
-    <CheckBox Name="GUIDebug" Content="Use GUI Debug Window(--enable-debug-gui) (_g)" />
-    <CheckBox Name="SDK2Debug" Content="Use Detail (for SDK2) Debug Logging(--enable-sdk-log-levels) (_s)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
-    <CheckBox Name="UDONDebug" Content="Use Detail UDON Debug Logging(--enable-udon-debug-logging) (_u)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
-    <Border Height="1" Background="gray" Margin="3" />
-
-    <TextBlock Text="World ID(Empty:Go Home World)" />
-    <TextBox Name="WorldID" Text="" />
-    <!-- Todo: Change to Grid Panel -->
-    <StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <RadioButton Name="FriendP" GroupName="PublicRange" Content="Friend+" Tag="1" />
-        <RadioButton Name="Friend"  GroupName="PublicRange" Content="Friend"  Tag="2" />
+    <GroupBox Padding="5" BorderThickness="1">
+      <GroupBox.Header>
+        <TextBlock Text="Debug Logging" />
+      </GroupBox.Header>
+      <StackPanel>
+        <CheckBox Name="GUIDebug" Content="Use GUI Debug Window(--enable-debug-gui) (_g)" />
+        <CheckBox Name="SDK2Debug" Content="Use Detail (for SDK2) Debug Logging(--enable-sdk-log-levels) (_s)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
+        <CheckBox Name="UDONDebug" Content="Use Detail UDON Debug Logging(--enable-udon-debug-logging) (_u)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
       </StackPanel>
-      <StackPanel Orientation="Horizontal">
-        <RadioButton Name="InviteP" GroupName="PublicRange" Content="Invite+" Tag="3" />
-        <RadioButton Name="Invite"  GroupName="PublicRange" Content="Invite"  Tag="4" IsChecked="True" />
-      </StackPanel>
-    </StackPanel>
-    <Border Height="1" Background="gray" Margin="3" />
+    </GroupBox>
 
-    <TextBlock Text="Select Profile" />
-    <CheckBox Name="UserProfile0" Content="Profile0(_0)" IsChecked="True" />
-    <CheckBox Name="UserProfile1" Content="Profile1(_1)" />
-    <CheckBox Name="UserProfile2" Content="Profile2(_2)" />
-    <CheckBox Name="UserProfile3" Content="Profile3(_3)" />
+    <GroupBox Padding="5" BorderThickness="1">
+      <GroupBox.Header>
+        <TextBlock Text="Launch world" />
+      </GroupBox.Header>
+      <StackPanel>
+        <TextBlock Text="World ID (Empty: Default Home)" />
+        <TextBox Name="WorldID" Text="" />
+        <Grid>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+          </Grid.ColumnDefinitions>
+          <RadioButton Grid.Column="0" Name="FriendP" GroupName="PublicRange" Content="_Friend+"/>
+          <RadioButton Grid.Column="1" Name="Friend"  GroupName="PublicRange" Content="_Friend"/>
+          <RadioButton Grid.Column="2" Name="InviteP" GroupName="PublicRange" Content="_Invite+"/>
+          <RadioButton Grid.Column="3" Name="Invite"  GroupName="PublicRange" Content="_Invite" IsChecked="True" />
+        </Grid>
+      </StackPanel>
+    </GroupBox>
+
+    <Grid>
+      <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="1*" />
+          <ColumnDefinition Width="1*" />
+          <ColumnDefinition Width="1.5*" />
+      </Grid.ColumnDefinitions>
+      <StackPanel Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left">
+        <GroupBox Padding="5" Width="120" BorderThickness="1">
+          <GroupBox.Header>
+            <TextBlock Text="Log in with" />
+          </GroupBox.Header>
+          <StackPanel>
+            <CheckBox Name="UserProfile0" Content="Profile0(_0)" IsChecked="True" />
+            <CheckBox Name="UserProfile1" Content="Profile1(_1)" />
+            <CheckBox Name="UserProfile2" Content="Profile2(_2)" />
+            <CheckBox Name="UserProfile3" Content="Profile3(_3)" />
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+      <StackPanel Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left">
+        <GroupBox Padding="5" Width="120" BorderThickness="1">
+          <GroupBox.Header>
+            <TextBlock Text="Other" />
+          </GroupBox.Header>
+          <StackPanel>
+            <CheckBox Name="OnOculusRift" Content="Oculus Rift (_R)" IsChecked="False" />
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+      <StackPanel Grid.Row="0" Grid.Column="2">
+        <GroupBox Width="160" BorderThickness="1">
+          <GroupBox.Header>
+            <TextBlock Text="VRChat Boot on" />
+          </GroupBox.Header>
+          <StackPanel>
+            <Button Name="BootVR" Content="VR mode (_V)" IsDefault="True" Width="90" Height="30" Margin="10" />
+            <Button Name="BootDesktop" Content="Desktop mode (_D)" IsDefault="True" Width="120" Height="30" Margin="10" />
+          </StackPanel>
+        </GroupBox>
+      </StackPanel>
+    </Grid>
     
-    <Button Name="Boot" Content="Boot VRChat(_b)" IsDefault="True" Width="90" Height="30" />
   </StackPanel>
 </Window>
