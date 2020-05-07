@@ -78,7 +78,7 @@ $chk_oculusRift  = $window.FindName("OnOculusRift")
 
 $chk_guiDebug    = $window.FindName("GUIDebug")
 $chk_sdk2debug   = $window.FindName("SDK2Debug")
-$chk_udonDebug   = $window.FindName("UDONDebug")
+$chk_udonDebug   = $window.FindName("UdonDebug")
 
 $txt_worldID     = $window.FindName("WorldID")
 $txt_worldID.Text = $worldID_watermark_text

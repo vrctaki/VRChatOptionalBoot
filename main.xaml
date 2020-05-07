@@ -14,7 +14,7 @@
       <StackPanel>
         <CheckBox Name="GUIDebug" Content="Use GUI Debug Window(--enable-debug-gui) (_g)" />
         <CheckBox Name="SDK2Debug" Content="Use Detail (for SDK2) Debug Logging(--enable-sdk-log-levels) (_s)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
-        <CheckBox Name="UDONDebug" Content="Use Detail UDON Debug Logging(--enable-udon-debug-logging) (_u)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
+        <CheckBox Name="UdonDebug" Content="Use Detail Udon Debug Logging(--enable-udon-debug-logging) (_u)" Margin="20 0 0 0" IsEnabled="False" IsChecked="True"/>
       </StackPanel>
     </GroupBox>
 
