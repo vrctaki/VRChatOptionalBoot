@@ -3,7 +3,7 @@ VRChat のログインオプションをGUIで取り扱い易くしたツール。
 Powershell スクリプトで作成しているため容易に自分用に修正が可能です。
 
 ## 起動イメージ
-![image](https://user-images.githubusercontent.com/60001124/81126235-ab883f00-8f75-11ea-9cef-de0c7bc9095a.png)
+![image](https://user-images.githubusercontent.com/60001124/84652277-595c1580-af46-11ea-820f-ac92cc61aac3.png)
 
 ## License
 MIT License
