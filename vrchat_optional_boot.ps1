@@ -1,14 +1,21 @@
-# * Script Information:
+﻿# * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.8
+#   - Version: 0.0.9
 #   - Licence: MIT
 #   - Author: vrctaki
 
 Param(
+    [string]$launch_url, 
     [switch]$CreateShortcut
 )
 
+Get-Location
+Set-Location -Path $PSScriptRoot
+Get-Location
+
+####################
 # Const
+####################
 $vrc_install_dir = (Get-ItemProperty -LiteralPath HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\Steam` App` 438100).InstallLocation
 $vrc_path = Join-Path $vrc_install_dir "vrchat.exe"
 
@@ -24,12 +31,14 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.8"
-
+$script_version = "0.0.9"
+$script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
+$script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
 
 # Initializing Environment
-if ($CreateShortcut) {
-    $favicon_path = Join-Path -Path $PSScriptRoot -ChildPath ((Get-Item $PSCommandPath).Basename + ".ico")
+
+function EntryShortcutToStartmenu($doseCopyToStartMenu) {
+    $favicon_path = Join-Path -Path $PSScriptRoot -ChildPath $script_icon_path
     if (-not (Test-Path $favicon_path)) {
       $favicon_path = $vrc_path + ',0';
     }
@@ -48,8 +57,7 @@ if ($CreateShortcut) {
     $sc.Description = "Boot VRChat with optional arguments"
     $sc.save()
 
-    $doseCopyToStartMenu = Read-Host "Copy shortcut to Startmenu?[Y/N](Default[Y])"
-    if ($doseCopyToStartMenu -ne "N") {
+    if ($doseCopyToStartMenu) {
         Write-Host ("Create shortcut file '{0}'" -f $shortcut_path)
         Copy-Item -Path $shortcut_fname -Destination $shortcut_folder
         Start-Process -FilePath "Explorer.exe" -ArgumentList ("/select,`"{0}`"" -f $shortcut_path)
@@ -57,24 +65,39 @@ if ($CreateShortcut) {
     return
 }
 
+if ($CreateShortcut) {
+    EntryShortcutToStartmenu($false)
+}
+
+####################
 # Import Modules
+####################
 Add-Type -Assembly System.Windows.Forms
 Add-Type -AssemblyName PresentationFramework
 
 
+####################
 # UI
-[xml]$xaml = Get-Content ".\main.xaml"
+####################
+[xml]$xaml = (Get-Content ".\main.xaml") -replace "PSScriptRoot", $PSScriptRoot
 
-
+####################
 # Create Window 
+####################
 $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 $window = [Windows.Markup.XamlReader]::Load($reader)
 
-$window.Title = ("VRC Optional Boot(v{0})" -f ($script_version))
+$window.Title = $script_title
+if (Test-Path $script_icon_path) {
+    $window.Icon  = $script_icon_path
+}
 
-
+####################
 # Get Controls
+####################
 $chk_oculusRift  = $window.FindName("OnOculusRift")
+
+$menu_create_shortcut = $window.FindName("Command_Create_Shortcut")
 
 $chk_guiDebug    = $window.FindName("GUIDebug")
 $chk_sdk2debug   = $window.FindName("SDK2Debug")
@@ -99,10 +122,17 @@ $chk_profile3    = $window.FindName("UserProfile3")
 $btn_bootVR      = $window.FindName("BootVR")
 $btn_bootDesktop = $window.FindName("BootDesktop")
 
+####################
 # Set Events
+####################
 $sb_toggleGUIDebug = {$chk_sdk2debug.IsEnabled = $chk_udonDebug.IsEnabled = ($chk_guiDebug.IsChecked)}
 $chk_guiDebug.Add_Checked($sb_toggleGUIDebug)
 $chk_guiDebug.Add_UnChecked($sb_toggleGUIDebug)
+
+$menu_create_shortcut.Add_Click({
+    EntryShortcutToStartmenu($true)
+})
+
 
 $txt_worldID.Add_KeyUp({
     if ($txt_worldID.Text.Length -eq 0 -or $txt_worldID.Text -match $regex_worldID) {
@@ -170,7 +200,11 @@ function Boot-VRChat{
         }
     }
 
-    if ($txt_worldID.Text.Length -and $txt_worldID.Text -match $regex_worldID) {
+    if ($launch_url -ne $null) {
+        $room_url = $launch_url
+        $boot_properties += $room_url
+    }
+    elseif ($txt_worldID.Text.Length -and $txt_worldID.Text -match $regex_worldID) {
         $dammy_user = "usr_00000000-0000-0000-0000-000000000000"
         $world_id   = $txt_worldID.Text
 
@@ -211,7 +245,9 @@ function Boot-VRChat{
 
 
 
-# shoft hand
+####################
+# short hand
+####################
 $window.Add_KeyDown({
     $press_key = $_.Key.toString()
 
@@ -226,8 +262,8 @@ $window.Add_KeyDown({
 })
 
 
-
-
+####################
 # Show Window
+####################
 $window.ShowDialog() > $null
 $window = $null
