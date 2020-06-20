@@ -67,6 +67,7 @@ function EntryShortcutToStartmenu($doseCopyToStartMenu) {
 
 if ($CreateShortcut) {
     EntryShortcutToStartmenu($false)
+    return
 }
 
 ####################
