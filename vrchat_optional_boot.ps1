@@ -31,7 +31,7 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.10"
+$script_version = "0.0.9"
 $script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
 $script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
 
@@ -66,7 +66,7 @@ function EntryShortcutToStartmenu($doseCopyToStartMenu) {
 }
 
 if ($CreateShortcut) {
-    EntryShortcutToStartmenu($false)]
+    EntryShortcutToStartmenu($false)
     return
 }
 
