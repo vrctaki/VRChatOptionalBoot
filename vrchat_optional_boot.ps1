@@ -31,7 +31,7 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.9"
+$script_version = "0.0.10"
 $script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
 $script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
 
@@ -66,7 +66,7 @@ function EntryShortcutToStartmenu($doseCopyToStartMenu) {
 }
 
 if ($CreateShortcut) {
-    EntryShortcutToStartmenu($false)
+    EntryShortcutToStartmenu($false)]
     return
 }
 
@@ -118,6 +118,8 @@ $chk_profile0    = $window.FindName("UserProfile0")
 $chk_profile1    = $window.FindName("UserProfile1")
 $chk_profile2    = $window.FindName("UserProfile2")
 $chk_profile3    = $window.FindName("UserProfile3")
+
+$chk_nonclosing_mode = $window.FindName("NonClosingMode")
 
 # $btn_boot        = $window.FindName("Boot")
 $btn_bootVR      = $window.FindName("BootVR")
@@ -241,7 +243,9 @@ function Boot-VRChat{
         &$sb_launch (($boot_properties + "--profile=3") -join " ")
     }
 
-    $window.close()
+    if ($chk_nonclosing_mode.IsChecked -eq $false) {
+        $window.close()
+    }
 }
 
 

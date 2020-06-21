@@ -3,7 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title=""
   Width="480"
-  Height="470"
+  Height="490"
   Background="GhostWhite"
   ResizeMode="CanMinimize"
   >
@@ -11,7 +11,7 @@
     <DockPanel>
         <Menu Name="menu1" DockPanel.Dock="Top">
             <MenuItem Header="_Menu">
-                <MenuItem Header="Create Shortcut to Start Menu" Name="Command_Create_Shortcut" />
+                <MenuItem Name="Command_Create_Shortcut"  Header="Create Shortcut to Start Menu" />
             </MenuItem>
         </Menu>
     </DockPanel>
@@ -88,10 +88,13 @@
     </StackPanel>
     
     <StackPanel HorizontalAlignment="Right">
+      <StackPanel HorizontalAlignment="Right">
+        <CheckBox Name="NonClosingMode" Content="Non Closing Mode (_N)" IsChecked="False" Margin="0 0 10 0" />
+      </StackPanel>
       <StackPanel Orientation="Horizontal">
-          <TextBlock Text="Boot VRChat on:" FontSize="15" VerticalAlignment="Center" />
-          <Button Name="BootVR" Content="VR mode (_V)" Width="90" Height="30" Margin="5" />
-          <Button Name="BootDesktop" Content="Desktop mode (_D)" IsDefault="True" Width="120" Height="30" Margin="5" />
+        <TextBlock Text="Boot VRChat on:" FontSize="15" VerticalAlignment="Center" />
+        <Button Name="BootVR" Content="VR mode (_V)" Width="90" Height="30" Margin="5" />
+        <Button Name="BootDesktop" Content="Desktop mode (_D)" IsDefault="True" Width="120" Height="30" Margin="5" />
       </StackPanel>
     </StackPanel>
 
