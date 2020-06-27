@@ -3,7 +3,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title=""
   Width="480"
-  Height="490"
+  Height="510"
   Background="GhostWhite"
   ResizeMode="CanMinimize"
   >
@@ -11,7 +11,10 @@
     <DockPanel>
         <Menu Name="menu1" DockPanel.Dock="Top">
             <MenuItem Header="_Menu">
-                <MenuItem Name="Command_Create_Shortcut"  Header="Create Shortcut to Start Menu" />
+                <MenuItem Name="Command_Create_Shortcut" Header="Create Shortcut to Start Menu" />
+                <Separator />
+                <MenuItem Name="Command_Add_BrowserLaunch" Header="Set boot this from browser launch." />
+                <MenuItem Name="Command_Remove_BrowserLaunch" Header="Remove Browser Launch Mode" />
             </MenuItem>
         </Menu>
     </DockPanel>
@@ -37,17 +40,23 @@
         <StackPanel>
           <TextBlock Text="World ID (Empty: Default Home)" />
           <TextBox Name="WorldID" Text="" />
+          <StackPanel Orientation="Horizontal">
+            <TextBlock Text="RoomID: " />
+            <TextBox Name="RoomID" Text="" Width="100" />
+          </StackPanel>
           <Grid>
             <Grid.ColumnDefinitions>
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" Name="FriendP" GroupName="PublicRange" Content="_Friend+"/>
-            <RadioButton Grid.Column="1" Name="Friend"  GroupName="PublicRange" Content="_Friend"/>
-            <RadioButton Grid.Column="2" Name="InviteP" GroupName="PublicRange" Content="_Invite+"/>
-            <RadioButton Grid.Column="3" Name="Invite"  GroupName="PublicRange" Content="_Invite" IsChecked="True" />
+            <RadioButton Grid.Column="0" Name="Public"  GroupName="PublicRange" Content="Public"/>
+            <RadioButton Grid.Column="1" Name="FriendP" GroupName="PublicRange" Content="_Friends+"/>
+            <RadioButton Grid.Column="2" Name="Friend"  GroupName="PublicRange" Content="_Friends"/>
+            <RadioButton Grid.Column="3" Name="InviteP" GroupName="PublicRange" Content="_Invite+"/>
+            <RadioButton Grid.Column="4" Name="Invite"  GroupName="PublicRange" Content="_Invite" IsChecked="True" />
           </Grid>
         </StackPanel>
       </GroupBox>

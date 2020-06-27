@@ -1,17 +1,15 @@
 ﻿# * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.9
+#   - Version: 0.0.11
 #   - Licence: MIT
 #   - Author: vrctaki
 
 Param(
-    [string]$launch_url, 
+    [string]$LaunchURL, 
     [switch]$CreateShortcut
 )
 
-Get-Location
 Set-Location -Path $PSScriptRoot
-Get-Location
 
 ####################
 # Const
@@ -31,14 +29,14 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.9"
+$script_version = "0.0.11"
 $script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
 $script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
+$favicon_path = Join-Path -Path $PSScriptRoot -ChildPath $script_icon_path
 
 # Initializing Environment
 
 function EntryShortcutToStartmenu($doseCopyToStartMenu) {
-    $favicon_path = Join-Path -Path $PSScriptRoot -ChildPath $script_icon_path
     if (-not (Test-Path $favicon_path)) {
       $favicon_path = $vrc_path + ',0';
     }
@@ -70,6 +68,7 @@ if ($CreateShortcut) {
     return
 }
 
+
 ####################
 # Import Modules
 ####################
@@ -89,8 +88,8 @@ $reader = (New-Object System.Xml.XmlNodeReader $xaml)
 $window = [Windows.Markup.XamlReader]::Load($reader)
 
 $window.Title = $script_title
-if (Test-Path $script_icon_path) {
-    $window.Icon  = $script_icon_path
+if (Test-Path $favicon_path) {
+    $window.Icon  = $favicon_path
 }
 
 ####################
@@ -98,7 +97,10 @@ if (Test-Path $script_icon_path) {
 ####################
 $chk_oculusRift  = $window.FindName("OnOculusRift")
 
-$menu_create_shortcut = $window.FindName("Command_Create_Shortcut")
+$menu_create_shortcut     = $window.FindName("Command_Create_Shortcut")
+$menu_add_browser_mode    = $window.FindName("Command_Add_BrowserLaunch")
+$menu_remove_browser_mode = $window.FindName("Command_Remove_BrowserLaunch")
+
 
 $chk_guiDebug    = $window.FindName("GUIDebug")
 $chk_sdk2debug   = $window.FindName("SDK2Debug")
@@ -107,8 +109,9 @@ $chk_udonDebug   = $window.FindName("UDONDebug")
 $txt_worldID     = $window.FindName("WorldID")
 $txt_worldID.Text = $worldID_watermark_text
 $txt_worldID.Foreground = $worldID_watermark_fc
+$txt_roomID      = $window.FindName("RoomID")
 
-$rdi_publicRange = $window.FindName("PublicRange")  # not use
+$rdi_public      = $window.FindName("Public")
 $rdi_friendp     = $window.FindName("FriendP")
 $rdi_friend      = $window.FindName("Friend")
 $rdi_invitep     = $window.FindName("InviteP")
@@ -121,7 +124,7 @@ $chk_profile3    = $window.FindName("UserProfile3")
 
 $chk_nonclosing_mode = $window.FindName("NonClosingMode")
 
-# $btn_boot        = $window.FindName("Boot")
+# $btn_boot      = $window.FindName("Boot")
 $btn_bootVR      = $window.FindName("BootVR")
 $btn_bootDesktop = $window.FindName("BootDesktop")
 
@@ -134,6 +137,24 @@ $chk_guiDebug.Add_UnChecked($sb_toggleGUIDebug)
 
 $menu_create_shortcut.Add_Click({
     EntryShortcutToStartmenu($true)
+})
+
+
+$menu_add_browser_mode.Add_Click({
+    if ((Test-Path 'HKCU:\\Software\Classes\VRChat\shell\open\command') -eq $false) {
+        New-Item 'HKCU:\\Software\Classes\VRChat\shell\open\command'
+    }
+
+    New-ItemProperty -LiteralPath 'HKCU:\\Software\Classes\VRChat\shell\open\command' -Name '(default)' -PropertyType 'String' -Value (
+        'powershell -ExecutionPolicy RemoteSigned -WindowStyle Hidden "' + $PSCommandPath + '" ''"`%1"'''
+    )
+})
+
+
+$menu_remove_browser_mode.Add_Click({
+    if ((Test-Path -LiteralPath "HKCU:\\Software\Classes\VRChat\shell\open\command")) {
+        Remove-Item 'HKCU:\\Software\Classes\VRChat\shell\open\command'
+    }
 })
 
 
@@ -210,8 +231,9 @@ function Boot-VRChat{
     elseif ($txt_worldID.Text.Length -and $txt_worldID.Text -match $regex_worldID) {
         $dammy_user = "usr_00000000-0000-0000-0000-000000000000"
         $world_id   = $txt_worldID.Text
+        $room_id    = $txt_roomID.Text
 
-        $room_url = "vrchat://launch/?ref=vrchat.com&id={0}:OptionalBoot" -f ($world_id)
+        $room_url = "vrchat://launch/?ref=vrchat.com&id={0}:{1}" -f ($world_id, $room_id)
 
         if ($rdi_friendp.IsChecked) {
             $room_url += ("~hidden({0})" -f $dammy_user)
@@ -266,9 +288,45 @@ $window.Add_KeyDown({
     }
 })
 
+####################
+# Parameter Switch
+####################
+if ($LaunchURL) {
+    $LaunchURL -match "(?<=id=)(wrld_[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}):(\d+)" | Out-Null
+
+    $txt_worldID.Text = $Matches[1]
+    $txt_worldID.Foreground = "Black"
+    $txt_roomID.Text   = $Matches[2]
+
+    $result = $LaunchURL -match "~(hidden|friends|private).+~(canRequestInvite)?"
+
+    if ($result -eq $false) {
+        # Public
+        $rdi_public.IsChecked = $true
+    }
+    else {
+        if ($Matches[1] -eq "hidden") {
+            # Friends+
+            $rdi_friendp.IsChecked = $true
+        }
+        elseif ($Matches[1] -eq "friends") {
+            # Friends
+            $rdi_friend.IsChecked = $true
+        }
+        elseif ($Matches[1] -eq "private" -and $Matches[2].Length) {
+            # Invite+
+            $rdi_invitep.IsChecked = $true
+        }
+        elseif ($Matches[1] -eq "private") {
+            #Invite
+            $rdi_invite.IsChecked = $true
+        }
+    }
+}
 
 ####################
 # Show Window
 ####################
 $window.ShowDialog() > $null
 $window = $null
+
