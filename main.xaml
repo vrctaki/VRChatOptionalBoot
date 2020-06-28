@@ -52,11 +52,11 @@
               <ColumnDefinition Width="*" />
               <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <RadioButton Grid.Column="0" Name="Public"  GroupName="PublicRange" Content="Public"/>
-            <RadioButton Grid.Column="1" Name="FriendP" GroupName="PublicRange" Content="_Friends+"/>
-            <RadioButton Grid.Column="2" Name="Friend"  GroupName="PublicRange" Content="_Friends"/>
-            <RadioButton Grid.Column="3" Name="InviteP" GroupName="PublicRange" Content="_Invite+"/>
-            <RadioButton Grid.Column="4" Name="Invite"  GroupName="PublicRange" Content="_Invite" IsChecked="True" />
+            <RadioButton Grid.Column="0" Name="Public"  GroupName="PublicRange" Content="Public" />
+            <RadioButton Grid.Column="1" Name="FriendP" GroupName="PublicRange" Content="_Friends+" IsChecked="True" />
+            <RadioButton Grid.Column="2" Name="Friend"  GroupName="PublicRange" Content="_Friends" />
+            <RadioButton Grid.Column="3" Name="InviteP" GroupName="PublicRange" Content="_Invite+" />
+            <RadioButton Grid.Column="4" Name="Invite"  GroupName="PublicRange" Content="_Invite" />
           </Grid>
         </StackPanel>
       </GroupBox>

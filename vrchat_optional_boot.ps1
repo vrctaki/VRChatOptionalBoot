@@ -1,6 +1,6 @@
 ﻿# * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.11
+#   - Version: 0.0.12
 #   - Licence: MIT
 #   - Author: vrctaki
 
@@ -29,12 +29,19 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.11"
+$script_version = "0.0.12"
 $script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
 $script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
 $favicon_path = Join-Path -Path $PSScriptRoot -ChildPath $script_icon_path
 
+####################
+# Vars
+####################
+$user_id = "usr_00000000-0000-0000-0000-000000000000"
+$nonce_id = $null
+
 # Initializing Environment
+
 
 function EntryShortcutToStartmenu($doseCopyToStartMenu) {
     if (-not (Test-Path $favicon_path)) {
@@ -229,23 +236,27 @@ function Boot-VRChat{
         $boot_properties += $room_url
     }
     elseif ($txt_worldID.Text.Length -and $txt_worldID.Text -match $regex_worldID) {
-        $dammy_user = "usr_00000000-0000-0000-0000-000000000000"
         $world_id   = $txt_worldID.Text
         $room_id    = $txt_roomID.Text
 
         $room_url = "vrchat://launch/?ref=vrchat.com&id={0}:{1}" -f ($world_id, $room_id)
 
         if ($rdi_friendp.IsChecked) {
-            $room_url += ("~hidden({0})" -f $dammy_user)
+            $room_url += ("~hidden({0})" -f $user_id)
         }
-        if ($rdi_friend.IsChecked) {
-            $room_url += ("~friends({0})" -f $dammy_user)
+        elseif ($rdi_friend.IsChecked) {
+            $room_url += ("~friends({0})" -f $user_id)
         }
+        elseif ($rdi_invitep.IsChecked -or $rdi_invite.IsChecked) {
+            $room_url += ("~private({0})" -f $user_id)
+        }
+
+        if ($nonce_id -ne $null) {
+            $room_url += ("~nonce({0})" -f $nonce_id)
+        }
+
         if ($rdi_invitep.IsChecked) {
-            $room_url += ("~private({0})~canRequestInvite" -f $dammy_user)
-        }
-        if ($rdi_invite.IsChecked) {
-            $room_url += ("~private({0})" -f $dammy_user)
+            $room_url += "~canRequestInvite"
         }
 
         $boot_properties += $room_url
@@ -298,7 +309,9 @@ if ($LaunchURL) {
     $txt_worldID.Foreground = "Black"
     $txt_roomID.Text   = $Matches[2]
 
-    $result = $LaunchURL -match "~(hidden|friends|private).+~(canRequestInvite)?"
+    $result = $LaunchURL -match "~(hidden|friends|private)\((usr_[^)]+)\)~nonce\(([^)]+)\).*(~canRequestInvite)?"
+    $user_id = $Matches[2]
+    $nonce_id = $Matches[3]
 
     if ($result -eq $false) {
         # Public
@@ -313,7 +326,7 @@ if ($LaunchURL) {
             # Friends
             $rdi_friend.IsChecked = $true
         }
-        elseif ($Matches[1] -eq "private" -and $Matches[2].Length) {
+        elseif ($Matches[1] -eq "private" -and $Matches[4].Length) {
             # Invite+
             $rdi_invitep.IsChecked = $true
         }
@@ -322,6 +335,15 @@ if ($LaunchURL) {
             $rdi_invite.IsChecked = $true
         }
     }
+
+    $txt_worldID.IsEnabled = 
+    $txt_roomID.IsEnabled  = 
+    $rdi_public.IsEnabled  =
+    $rdi_friendp.IsEnabled =
+    $rdi_friend.IsEnabled  =
+    $rdi_invitep.IsEnabled =
+    $rdi_invite.IsEnabled  = $false
+
 }
 
 ####################
