@@ -1,55 +1,55 @@
 # VRChatOptionalBoot
-VRChat ‚ÌƒƒOƒCƒ“ƒIƒvƒVƒ‡ƒ“‚ğGUI‚Åæ‚èˆµ‚¢ˆÕ‚­‚µ‚½ƒc[ƒ‹B
-Powershell ƒXƒNƒŠƒvƒg‚Åì¬‚µ‚Ä‚¢‚é‚½‚ß—eˆÕ‚É©•ª—p‚ÉC³‚ª‰Â”\‚Å‚·B
+VRChat ã®ãƒ­ã‚°ã‚¤ãƒ³ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’GUIã§å–ã‚Šæ‰±ã„æ˜“ãã—ãŸãƒ„ãƒ¼ãƒ«ã€‚
+Powershell ã‚¹ã‚¯ãƒªãƒ—ãƒˆã§ä½œæˆã—ã¦ã„ã‚‹ãŸã‚å®¹æ˜“ã«è‡ªåˆ†ç”¨ã«ä¿®æ­£ãŒå¯èƒ½ã§ã™ã€‚
 
-## ‹N“®ƒCƒ[ƒW
-![image](https://user-images.githubusercontent.com/60001124/84652277-595c1580-af46-11ea-820f-ac92cc61aac3.png)
+## èµ·å‹•ã‚¤ãƒ¡ãƒ¼ã‚¸
+![image](https://user-images.githubusercontent.com/60001124/85929808-bb2b6080-b8f2-11ea-96c6-77032ac2e31d.png)
 
 ## License
 MIT License
 
-## g‚¢•û
-1. ƒŠƒ|ƒWƒgƒŠ‚Ìƒgƒbƒvƒy[ƒW‚©‚ç [Clone or download]-[Download ZIP] ‚ğ‘I‘ğ‚µ‚Äƒ_ƒEƒ“ƒ[ƒh
-2. ƒ_ƒEƒ“ƒ[ƒh‚µ‚½ƒtƒ@ƒCƒ‹‚ğ‰ğ“€(“WŠJ)
-3. ƒtƒHƒ‹ƒ_“à‚Ì Initialize.bat ‚ğ‹N“®(*1)
-4. “¯ŠK‘w–”‚ÍƒXƒ^[ƒgƒƒjƒ…[‚É“o˜^‚µ‚½ƒVƒ‡[ƒgƒJƒbƒg‚©‚ç‹N“®
-5. ƒIƒvƒVƒ‡ƒ“‚ğw’è‚µ‚Ä VRChat ‚ğ‹N“®
+## ä½¿ã„æ–¹
+1. ãƒªãƒã‚¸ãƒˆãƒªã®ãƒˆãƒƒãƒ—ãƒšãƒ¼ã‚¸ã‹ã‚‰ [Clone or download]-[Download ZIP] ã‚’é¸æŠã—ã¦ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰
+2. ãƒ€ã‚¦ãƒ³ãƒ­ãƒ¼ãƒ‰ã—ãŸãƒ•ã‚¡ã‚¤ãƒ«ã‚’è§£å‡(å±•é–‹)
+3. ãƒ•ã‚©ãƒ«ãƒ€å†…ã® Initialize.bat ã‚’èµ·å‹•(*1)
+4. åŒéšå±¤åˆã¯ã‚¹ã‚¿ãƒ¼ãƒˆãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«ç™»éŒ²ã—ãŸã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‹ã‚‰èµ·å‹•
+5. ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã‚’æŒ‡å®šã—ã¦ VRChat ã‚’èµ·å‹•
 
-*1 ‰º‹LŒx‚ª•\¦‚³‚ê‚½ê‡‚Í [Ú×î•ñ] ‚ğ‘I‘ğ‚µ‚Ä‚©‚ç [Às]<br />
+*1 ä¸‹è¨˜è­¦å‘ŠãŒè¡¨ç¤ºã•ã‚ŒãŸå ´åˆã¯ [è©³ç´°æƒ…å ±] ã‚’é¸æŠã—ã¦ã‹ã‚‰ [å®Ÿè¡Œ]<br />
    ![image](https://user-images.githubusercontent.com/11162845/81124200-d1124a00-8f6f-11ea-9ec5-2bd54186167c.png)
 
-## ƒIƒvƒVƒ‡ƒ“ˆê——
+## ã‚ªãƒ—ã‚·ãƒ§ãƒ³ä¸€è¦§
 | head1 | head2 |
 | ----- | ----- |
-| Desktop Mode(--no-vr) | ƒfƒXƒNƒgƒbƒvƒ‚[ƒh‚Å‹N“®‚·‚é |
-| Oculus Rift | Oculus ‚ÅƒRƒ“ƒgƒ[ƒ‰‚ªãè‚­g‚¦‚È‚­‚È‚éê‡‚ª‚ ‚é‚½‚ßŠÖ˜A‚·‚éƒAƒvƒŠƒP[ƒVƒ‡ƒ“‚ğ’iŠK“I‚É‹N“®‚·‚é |
-| Use GUI Debug Window(--enable-debug-gui) | `Shift+@+3` “™‚ÌƒfƒoƒbƒO•\¦‚ğ—LŒø‚É‚·‚é |
-| Use Detail (for SDK2) Debug Logging(--enable-sdk-log-levels) | SDK2—p‚ÌÚ×‚ÈƒfƒoƒbƒOî•ñ‚Ìo—Í‚ğ—LŒø‚É‚·‚é |
-| Use Detail UDON Debug Logging(--enable-udon-debug-logging) | UDON—p‚ÌÚ×‚ÈƒfƒoƒbƒOî•ñ‚Ìo—Í‚ğ—LŒø‚É‚·‚é |
-| World ID(Empty:Go Home World) | World ID ‚ğw’è‚µ‚Ä‹N“®‚·‚é(‹ó‚Ìê‡‚Íƒz[ƒ€‚Å‹N“®) |
-| Profile0-3 | “Á’è‚Ìƒvƒƒtƒ@ƒCƒ‹‚Å‹N“®‚·‚é |
-| Boot VRChat | ã‹Lİ’è‚Å VRChat ‚ğ‹N“®‚·‚é |
+| Desktop Mode(--no-vr) | ãƒ‡ã‚¹ã‚¯ãƒˆãƒƒãƒ—ãƒ¢ãƒ¼ãƒ‰ã§èµ·å‹•ã™ã‚‹ |
+| Oculus Rift | Oculus ã§ã‚³ãƒ³ãƒˆãƒ­ãƒ¼ãƒ©ãŒä¸Šæ‰‹ãä½¿ãˆãªããªã‚‹å ´åˆãŒã‚ã‚‹ãŸã‚é–¢é€£ã™ã‚‹ã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ®µéšçš„ã«èµ·å‹•ã™ã‚‹ |
+| Use GUI Debug Window(--enable-debug-gui) | `Shift+@+3` ç­‰ã®ãƒ‡ãƒãƒƒã‚°è¡¨ç¤ºã‚’æœ‰åŠ¹ã«ã™ã‚‹ |
+| Use Detail (for SDK2) Debug Logging(--enable-sdk-log-levels) | SDK2ç”¨ã®è©³ç´°ãªãƒ‡ãƒãƒƒã‚°æƒ…å ±ã®å‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹ |
+| Use Detail UDON Debug Logging(--enable-udon-debug-logging) | UDONç”¨ã®è©³ç´°ãªãƒ‡ãƒãƒƒã‚°æƒ…å ±ã®å‡ºåŠ›ã‚’æœ‰åŠ¹ã«ã™ã‚‹ |
+| World ID(Empty:Go Home World) | World ID ã‚’æŒ‡å®šã—ã¦èµ·å‹•ã™ã‚‹(ç©ºã®å ´åˆã¯ãƒ›ãƒ¼ãƒ ã§èµ·å‹•) |
+| Profile0-3 | ç‰¹å®šã®ãƒ—ãƒ­ãƒ•ã‚¡ã‚¤ãƒ«ã§èµ·å‹•ã™ã‚‹ |
+| Boot VRChat | ä¸Šè¨˜è¨­å®šã§ VRChat ã‚’èµ·å‹•ã™ã‚‹ |
 
-## ‚»‚Ì‘¼‚Ì‹@”\
+## ãã®ä»–ã®æ©Ÿèƒ½
 
-* D‚«‚ÈƒAƒCƒRƒ“‚ğ vrchat_optional_boot.ico ‚Æ‚¢‚¤–¼‘O‚ÅƒXƒNƒŠƒvƒgƒtƒHƒ‹ƒ_‚É”z’u‚µ‚Ä Intialize.bat ‚ÌÀs‚·‚é‚±‚Æ‚ÅAƒVƒ‡[ƒgƒJƒbƒg‚É”CˆÓ‚ÌƒAƒCƒRƒ“‚ğİ’è‚Å‚«‚é(naqtn‚³‚ñ’Ç‰Á)
+* å¥½ããªã‚¢ã‚¤ã‚³ãƒ³ã‚’ vrchat_optional_boot.ico ã¨ã„ã†åå‰ã§ã‚¹ã‚¯ãƒªãƒ—ãƒˆãƒ•ã‚©ãƒ«ãƒ€ã«é…ç½®ã—ã¦ Intialize.bat ã®å®Ÿè¡Œã™ã‚‹ã“ã¨ã§ã€ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã«ä»»æ„ã®ã‚¢ã‚¤ã‚³ãƒ³ã‚’è¨­å®šã§ãã‚‹(naqtnã•ã‚“è¿½åŠ )
 
-## QÆ
-* Initialize.bat ‚ÉŠÖ‚·‚é‰æ‘œ<br />
+## å‚ç…§
+* Initialize.bat ã«é–¢ã™ã‚‹ç”»åƒ<br />
   https://gist.github.com/naqtn/5153bb357c92689993e23d1b6c91505d
-* PowerShellƒƒ‚@GUI‚Ì“ü—Í‰æ–Ê‚ğ•\¦(XAML) - Qiita<br />
+* PowerShellãƒ¡ãƒ¢ã€€GUIã®å…¥åŠ›ç”»é¢ã‚’è¡¨ç¤º(XAML) - Qiita<br />
   https://qiita.com/Kosen-amai/items/27647f0a1ea5b41a9f5c
-* VRChat ƒ[ƒJƒ‹ƒeƒXƒg‹N“®•â•ƒXƒNƒŠƒvƒg / VRChat LocalTest launch aid script - - BOOTH<br />
+* VRChat ãƒ­ãƒ¼ã‚«ãƒ«ãƒ†ã‚¹ãƒˆèµ·å‹•è£œåŠ©ã‚¹ã‚¯ãƒªãƒ—ãƒˆ / VRChat LocalTest launch aid script - - BOOTH<br />
   https://kamishirolab.booth.pm/items/1954145
-* Windows 7 - ƒVƒ‡[ƒgƒJƒbƒg‚ğƒRƒs[‚·‚ébatƒtƒ@ƒCƒ‹‚ğì‚è‚½‚¢‚Å‚·Bbteratail<br />
+* Windows 7 - ã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆã‚’ã‚³ãƒ”ãƒ¼ã™ã‚‹batãƒ•ã‚¡ã‚¤ãƒ«ã‚’ä½œã‚ŠãŸã„ã§ã™ã€‚ï½œteratail<br />
   https://teratail.com/questions/57372
-* VBSFƒVƒ‡[ƒgƒJƒbƒgƒtƒ@ƒCƒ‹‚Ìì¬ - ƒvƒ`ƒGƒ“ƒWƒjƒA‚Ì”õ–Y˜^“I‚È‚ ‚ê‚±‚ê<br />
+* VBSï¼šã‚·ãƒ§ãƒ¼ãƒˆã‚«ãƒƒãƒˆãƒ•ã‚¡ã‚¤ãƒ«ã®ä½œæˆ - ãƒ—ãƒã‚¨ãƒ³ã‚¸ãƒ‹ã‚¢ã®å‚™å¿˜éŒ²çš„ãªã‚ã‚Œã“ã‚Œ<br />
   http://marazul2015.blog.fc2.com/blog-entry-39.html
-* naqtn(‚È‚­‚Æ‚ñ)‚³‚ñ‚ÍTwitter‚ğg‚Á‚Ä‚¢‚Ü‚· u@vrctaki ƒAƒCƒRƒ“‚ªŠg’£qˆá‚¢‚Å‘¶İ‚µ‚½‚ç‚»‚ê...<br />
+* naqtn(ãªãã¨ã‚“)ã•ã‚“ã¯Twitterã‚’ä½¿ã£ã¦ã„ã¾ã™ ã€Œ@vrctaki ã‚¢ã‚¤ã‚³ãƒ³ãŒæ‹¡å¼µå­é•ã„ã§å­˜åœ¨ã—ãŸã‚‰ãã‚Œ...<br />
   https://twitter.com/naqtn/status/1257659359573635075
 * Powercli/Powershell GUI Placeholder textbox example at master  kunaludapi/Powercli<br />
   https://github.com/kunaludapi/Powercli/tree/master/Powershell%20GUI%20Placeholder%20textbox%20example
-* ì¬‰Šú‚ÌƒcƒC[ƒg&ƒXƒŒƒbƒh<br />
+* ä½œæˆåˆæœŸã®ãƒ„ã‚¤ãƒ¼ãƒˆ&ã‚¹ãƒ¬ãƒƒãƒ‰<br />
   https://twitter.com/vrctaki/status/1257567286698766336
 
 
