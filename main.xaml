@@ -15,6 +15,8 @@
                 <Separator />
                 <MenuItem Name="Command_Add_BrowserLaunch" Header="Set boot this from browser launch." />
                 <MenuItem Name="Command_Remove_BrowserLaunch" Header="Remove Browser Launch Mode" />
+                <Separator />
+                <MenuItem Name="Open_LogFolder" Header="Open VRChat Log Folder" />
             </MenuItem>
         </Menu>
     </DockPanel>

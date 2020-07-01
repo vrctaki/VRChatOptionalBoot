@@ -107,6 +107,7 @@ $chk_oculusRift  = $window.FindName("OnOculusRift")
 $menu_create_shortcut     = $window.FindName("Command_Create_Shortcut")
 $menu_add_browser_mode    = $window.FindName("Command_Add_BrowserLaunch")
 $menu_remove_browser_mode = $window.FindName("Command_Remove_BrowserLaunch")
+$menu_open_log_foloer     = $window.FindName("Open_LogFolder")
 
 
 $chk_guiDebug    = $window.FindName("GUIDebug")
@@ -146,7 +147,6 @@ $menu_create_shortcut.Add_Click({
     EntryShortcutToStartmenu($true)
 })
 
-
 $menu_add_browser_mode.Add_Click({
     if ((Test-Path 'HKCU:\\Software\Classes\VRChat\shell\open\command') -eq $false) {
         New-Item 'HKCU:\\Software\Classes\VRChat\shell\open\command'
@@ -162,6 +162,10 @@ $menu_remove_browser_mode.Add_Click({
     if ((Test-Path -LiteralPath "HKCU:\\Software\Classes\VRChat\shell\open\command")) {
         Remove-Item 'HKCU:\\Software\Classes\VRChat\shell\open\command'
     }
+})
+
+$menu_open_log_foloer.Add_Click({
+    explorer (Join-Path $env:USERPROFILE "AppData\LocalLow\VRChat\VRChat")
 })
 
 
