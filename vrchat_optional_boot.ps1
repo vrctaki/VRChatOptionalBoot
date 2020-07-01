@@ -1,6 +1,6 @@
 ﻿# * Script Information:
 #   - Name: VRChat  Optional Boot
-#   - Version: 0.0.12
+#   - Version: 0.0.13
 #   - Licence: MIT
 #   - Author: vrctaki
 
@@ -29,7 +29,7 @@ $worldID_watermark_text = "wrld_xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
 $worldID_watermark_fc   = "DarkGray"
 
 $shortcut_basename = "VRChat optional boot"
-$script_version = "0.0.12"
+$script_version = "0.0.13"
 $script_title   = "VRChat Optional Boot(v{0})" -f ($script_version)
 $script_icon_path = ((Get-Item $PSCommandPath).Basename + ".ico") 
 $favicon_path = Join-Path -Path $PSScriptRoot -ChildPath $script_icon_path
